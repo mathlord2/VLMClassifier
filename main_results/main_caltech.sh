@@ -20,5 +20,5 @@ python main.py --method vlm --model_id Salesforce/instructblip-vicuna-13b --data
 
 # Baselines
 
-python main.py --method clip --model_id ViT-L/14@336px --data_path ../data/caltech.jsonl --class_path ../data/caltech_classes.json --split test --output_path outputs/caltech_clipvitl336_100classes.jsonl --including_label False --batch_size 32
-python main.py --method clip --model_id EVA01-CLIP-g-14-plus --data_path ../data/caltech.jsonl --class_path ../data/caltech_classes.json --split test --output_path outputs/caltech_evaclipg_100classes.jsonl --including_label False --batch_size 32
+# python main.py --method clip --model_id ViT-L/14@336px --data_path ../data/caltech.jsonl --class_path ../data/caltech_classes.json --split test --output_path outputs/caltech_clipvitl336_100classes.jsonl --including_label False --batch_size 32
+# python main.py --method clip --model_id EVA01-CLIP-g-14-plus --data_path ../data/caltech.jsonl --class_path ../data/caltech_classes.json --split test --output_path outputs/caltech_evaclipg_100classes.jsonl --including_label False --batch_size 32

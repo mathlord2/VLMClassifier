@@ -1,0 +1,1 @@
+./playground/data/imagewikiqa_predictions_llava-7b_imagenet-and-llava-trained.jsonl 2000 0 0.4325

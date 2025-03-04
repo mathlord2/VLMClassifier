@@ -51,8 +51,9 @@ def eval_model(args):
     answers_file = os.path.expanduser(args.answers_file)
     os.makedirs(os.path.dirname(answers_file), exist_ok=True)
     ans_file = open(answers_file, "w")
+
     for line in tqdm(questions):
-        idx = line["question_id"]
+        idx = line["label"]
         image_file = line["image"]
         qs = line["text"]
         cur_prompt = qs
@@ -73,9 +74,9 @@ def eval_model(args):
         prompt = conv.get_prompt()
 
         ############## Enable This Part for ImageWikiQA ##############
-        # conv.append_message(conv.roles[1], "Let's think step by step.")
-        # prompt = conv.get_prompt().replace("</s>", "")
-        # print(prompt)
+        conv.append_message(conv.roles[1], "Let's think step by step.")
+        prompt = conv.get_prompt().replace("</s>", "")
+        print(prompt)
 
         input_ids = (
             tokenizer_image_token(
@@ -120,6 +121,7 @@ def eval_model(args):
             )
             + "\n"
         )
+        
         ans_file.flush()
     ans_file.close()
 

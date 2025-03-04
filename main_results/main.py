@@ -43,24 +43,24 @@ def main(
     init_prompt=None,
 ):
     if "llava-v1.6" in model_id:
-        processor = LlavaNextProcessor.from_pretrained(model_id)
+        processor = LlavaNextProcessor.from_pretrained(model_id, cache_dir="/mmfs1/gscratch/raivn/exiao/cache")
         model = LlavaNextForConditionalGeneration.from_pretrained(
-            model_id, device_map="auto", torch_dtype=torch.bfloat16
+            model_id, device_map="auto", torch_dtype=torch.bfloat16, cache_dir="/mmfs1/gscratch/raivn/exiao/cache"
         )
     elif "blip2" in model_id:
-        processor = Blip2Processor.from_pretrained(model_id)
+        processor = Blip2Processor.from_pretrained(model_id, cache_dir="/mmfs1/gscratch/raivn/exiao/cache")
         model = Blip2ForConditionalGeneration.from_pretrained(
-            model_id, device_map="auto", torch_dtype=torch.bfloat16
+            model_id, device_map="auto", torch_dtype=torch.bfloat16, cache_dir="/mmfs1/gscratch/raivn/exiao/cache"
         )
     elif "instructblip" in model_id:
-        processor = InstructBlipProcessor.from_pretrained(model_id)
+        processor = InstructBlipProcessor.from_pretrained(model_id, cache_dir="/mmfs1/gscratch/raivn/exiao/cache")
         model = InstructBlipForConditionalGeneration.from_pretrained(
-            model_id, device_map="auto", torch_dtype=torch.bfloat16
+            model_id, device_map="auto", torch_dtype=torch.bfloat16, cache_dir="/mmfs1/gscratch/raivn/exiao/cache"
         )
     else:
-        processor = AutoProcessor.from_pretrained(model_id)
+        processor = AutoProcessor.from_pretrained(model_id, cache_dir="/mmfs1/gscratch/raivn/exiao/cache")
         model = LlavaForConditionalGeneration.from_pretrained(
-            model_id, device_map="auto", torch_dtype=torch.bfloat16
+            model_id, device_map="auto", torch_dtype=torch.bfloat16, cache_dir="/mmfs1/gscratch/raivn/exiao/cache"
         )
 
     data = [json.loads(line) for line in open(data_path)]
@@ -171,16 +171,16 @@ def main_clip(
 ):
     device = "cuda" if torch.cuda.is_available() else "cpu"
 
-    if "eva" in model_id.lower():
-        pretrained = "eva_clip"
-        model, _, preprocess = create_model_and_transforms(
-            model_id, pretrained, force_custom_clip=True
-        )
-        tokenizer = get_tokenizer(model_id)
-        model = model.to(device)
-    else:
-        model, preprocess = clip.load(model_id, device=device)
-        tokenizer = clip.tokenize
+    # if "eva" in model_id.lower():
+    #     pretrained = "eva_clip"
+    #     model, _, preprocess = create_model_and_transforms(
+    #         model_id, pretrained, force_custom_clip=True
+    #     )
+    #     tokenizer = get_tokenizer(model_id)
+    #     model = model.to(device)
+    # else:
+    model, preprocess = clip.load(model_id, device=device)
+    tokenizer = clip.tokenize
 
     data = [json.loads(line) for line in open(data_path)]
     data = [item for item in data if item["split"] == split]
