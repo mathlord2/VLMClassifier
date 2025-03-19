@@ -1,3 +1,5 @@
+## Model Inference
+
 import argparse
 import json
 import math
@@ -70,8 +72,8 @@ def eval_model(args):
 
         conv = conv_templates[args.conv_mode].copy()
         conv.append_message(conv.roles[0], qs)
-        conv.append_message(conv.roles[1], None)
-        prompt = conv.get_prompt()
+        # conv.append_message(conv.roles[1], None)
+        # prompt = conv.get_prompt()
 
         ############## Enable This Part for ImageWikiQA ##############
         conv.append_message(conv.roles[1], "Let's think step by step.")

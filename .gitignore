@@ -162,6 +162,7 @@ cython_debug/
 # Images and models
 images/
 training_analysis/llava/llava
+training_analysis/llava/vlmeval
 training_analysis/llava/checkpoints
 training_analysis/llava/playground
 training_analysis/llava/processed-llava-v1.5-7b-imagenet
